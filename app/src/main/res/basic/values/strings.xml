@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">lifediary</string>
+    <string name="str_username_tv">用户名:</string>
+    <string name="str_password_tv">密码:</string>
+    <string name="login_btn_lgoin">登入</string>
+    <string name="str_username_et">请输入帐号</string>
+    <string name="str_password_et">请输入密码:</string>
+</resources>

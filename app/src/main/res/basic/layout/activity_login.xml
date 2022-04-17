@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.LoginAndRegisterActivity">
+
+    <yzh.lifediary.customview.CustomVideoView
+        android:id="@+id/vv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/login_ll_pw"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginStart="30dp"
+            android:id="@+id/login_tv_id"
+            android:layout_height="wrap_content"
+            android:text="@string/str_password_tv" android:textSize="26sp"/>
+        <EditText
+            android:id="@+id/login_et_pw"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="30dp"
+            android:hint="@string/str_password_et"
+            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@id/login_ll_pw"
+        android:id="@+id/login_ll_id"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_tv_pw"
+            android:layout_marginStart="30dp"
+            android:text="@string/str_username_tv" android:textSize="26sp"/>
+        <EditText
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:hint="@string/str_username_et"
+            android:id="@+id/login_et_id"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_btn_login"
+        android:text="@string/login_btn_lgoin"
+        android:layout_width="wrap_content"
+        android:textSize="24sp"
+        android:layout_below="@id/login_ll_pw"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
+

@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }  //google()
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://jitpack.io' }
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "lifediary"
+include ':app'
+include ':permissonx'
+include ':myjson'

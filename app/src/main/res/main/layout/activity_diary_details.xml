@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+
+    tools:context=".view.DiaryDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/fanhuijiantou"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_icon_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                app:layout_constraintBottom_toBottomOf="@id/back_iv"
+                app:layout_constraintStart_toEndOf="@+id/back_iv"
+                app:layout_constraintTop_toTopOf="@id/back_iv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/username_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/user_icon_iv"
+                app:layout_constraintStart_toEndOf="@id/user_icon_iv"
+                app:layout_constraintTop_toTopOf="@id/user_icon_iv" />
+
+
+            <Button
+                android:id="@+id/gz_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/iconweiguanzhu"
+                app:layout_constraintBottom_toBottomOf="@id/username_tv"
+                app:layout_constraintEnd_toStartOf="@id/share_tv"
+                app:layout_constraintTop_toTopOf="@id/username_tv" />
+
+            <com.google.android.material.button.MaterialButton
+
+                android:id="@+id/share_tv"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:background="@drawable/fenxiang"
+                app:layout_constraintBottom_toBottomOf="@id/gz_iv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/gz_iv" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            app:banner_indicator_normal_color="@color/black"
+            app:banner_indicator_selected_color="@color/blue"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/diary_title_tv"
+                android:textStyle="bold"
+                android:textSize="23sp"
+                android:textColor="#131313"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="17sp"
+                android:id="@+id/diary_content_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="20dp"
+                    android:textSize="10sp"
+                    android:id="@+id/diary_time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="20dp"
+                    android:scaleType="fitCenter"
+                    android:layout_height="20dp"
+                    android:src="@drawable/wdianzan"
+                    android:id="@+id/like_iv" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
