@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ygz">#F44336</color>
+    <color name="wgz" >@color/blue</color>
+    <color name="change_label_color">@color/black</color>
+</resources>

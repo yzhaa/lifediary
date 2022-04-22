@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     private fun  initView() {
         val adapter = MainViewAdapter(supportFragmentManager, lifecycle)
         viewPage.isUserInputEnabled=false
-        viewPage.adapter = adapter
+        viewPage.adapter=adapter
 
         tabLayout.apply {
             addTab(tabLayout.newTab().setText("主页").setIcon(R.drawable.zhuye))

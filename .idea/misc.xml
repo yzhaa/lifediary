@@ -6,20 +6,49 @@
         <entry key="../../../../../Users/wow/.gradle/caches/transforms-3/1bc640515f3f66b865a35e13893b8de5/transformed/jetified-PreviewPictureView-1.1.0/res/layout/activity_image_preview.xml" value="0.1703125" />
         <entry key="../../../../../Users/wow/.gradle/caches/transforms-3/293f985c95ddbd1f9e38ad8c4ccd73e4/transformed/ImageSelector-2.2.1/res/drawable/btn_back_selector.xml" value="0.1" />
         <entry key="app/src/main/res/basic/drawable-v24/ic_launcher_foreground.xml" value="0.1245" />
+        <entry key="app/src/main/res/basic/drawable/divider_bg.xml" value="0.1" />
         <entry key="app/src/main/res/basic/drawable/ic_launcher_background.xml" value="0.1245" />
+        <entry key="app/src/main/res/basic/drawable/text_view_border.xml" value="0.1" />
+        <entry key="app/src/main/res/basic/drawable/translucent_button.xml" value="0.1" />
+        <entry key="app/src/main/res/basic/drawable/translucent_edit.xml" value="0.1" />
+        <entry key="app/src/main/res/basic/layout/activity_login.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/basic/layout/activity_main.xml" value="0.1828125" />
+        <entry key="app/src/main/res/basic/layout/activity_register.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/basic/layout/activity_search.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/basic/layout/activity_search_result.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/basic/layout/loadingview.xml" value="0.28489583333333335" />
         <entry key="app/src/main/res/basic/layout/tab.xml" value="0.11354166666666667" />
+        <entry key="app/src/main/res/basic/layout/title.xml" value="0.1703125" />
         <entry key="app/src/main/res/basic/menu/toolbar.xml" value="0.22864583333333333" />
+        <entry key="app/src/main/res/basic/xml/filepaths.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1755" />
         <entry key="app/src/main/res/info/drawable/button_drawable.xml" value="0.117" />
         <entry key="app/src/main/res/info/drawable/list_divider_line.xml" value="0.1885" />
         <entry key="app/src/main/res/info/drawable/normal.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/person_diary_item_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/save_btn.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/save_btn_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/save_btn_enable.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/save_et.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/save_et_cursor_style.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/wgz_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/info/drawable/ygz_drawable.xml" value="0.1" />
         <entry key="app/src/main/res/info/layout/activity_change_info.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/info/layout/activity_change_name.xml" value="0.2640625" />
+        <entry key="app/src/main/res/info/layout/activity_change_pass.xml" value="0.3177083333333333" />
+        <entry key="app/src/main/res/info/layout/activity_change_password.xml" value="0.3328804347826087" />
+        <entry key="app/src/main/res/info/layout/activity_collect.xml" value="0.1703125" />
         <entry key="app/src/main/res/info/layout/activity_diary_details.xml" value="0.2328125" />
         <entry key="app/src/main/res/info/layout/activity_register_info.xml" value="0.27447916666666666" />
+        <entry key="app/src/main/res/info/layout/activity_save_info.xml" value="0.3328804347826087" />
         <entry key="app/src/main/res/info/layout/activity_up_diary.xml" value="0.13020833333333334" />
         <entry key="app/src/main/res/info/layout/card.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/info/layout/diary_item.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/info/layout/fragment_info.xml" value="0.2640625" />
+        <entry key="app/src/main/res/info/layout/gr_article.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/info/layout/gz_item.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/info/layout/save_title.xml" value="0.3328804347826087" />
+        <entry key="app/src/main/res/info/layout/sc_item.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/info/layout/title.xml" value="0.27447916666666666" />
         <entry key="app/src/main/res/info/layout/userinfo.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16875" />
@@ -29,12 +58,19 @@
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.15" />
         <entry key="app/src/main/res/layout/tab.xml" value="0.15" />
         <entry key="app/src/main/res/like/layout/likeview.xml" value="0.15989583333333332" />
+        <entry key="app/src/main/res/main/drawable/cursor_style.xml" value="0.1" />
+        <entry key="app/src/main/res/main/drawable/diary_item_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/main/drawable/search_drawable.xml" value="0.1" />
         <entry key="app/src/main/res/main/drawable/selector_btn_orange.xml" value="0.1" />
+        <entry key="app/src/main/res/main/drawable/wgz_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/main/drawable/ygz_drawable.xml" value="0.1" />
         <entry key="app/src/main/res/main/layout/activity_diary_details.xml" value="0.2328125" />
         <entry key="app/src/main/res/main/layout/activity_moment_add.xml" value="0.203125" />
         <entry key="app/src/main/res/main/layout/activity_pre_view.xml" value="0.16458333333333333" />
         <entry key="app/src/main/res/main/layout/activity_up_diary.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/main/layout/activity_watch_image.xml" value="0.171875" />
+        <entry key="app/src/main/res/main/layout/appinfo_item.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/main/layout/dialog_bottom_sheet.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/main/layout/diary_item.xml" value="0.2328125" />
         <entry key="app/src/main/res/main/layout/fragment_diary.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/main/layout/fragment_main.xml" value="0.11354166666666667" />
@@ -42,9 +78,25 @@
         <entry key="app/src/main/res/main/layout/item_ninegridlayout.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/main/layout/popwindow.xml" value="0.246875" />
         <entry key="app/src/main/res/main/layout/preview_item.xml" value="0.171875" />
+        <entry key="app/src/main/res/main/layout/searchview.xml" value="0.13020833333333334" />
+        <entry key="app/src/main/res/main/layout/share_dialog.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/main/layout/share_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/main/layout/title.xml" value="0.2328125" />
         <entry key="app/src/main/res/main/layout/up_image_item.xml" value="0.31666666666666665" />
+        <entry key="app/src/main/res/main/menu/activity_search.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/search/drawable/search_diary_item_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/search/drawable/search_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/search/layout/activity_search.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/search/layout/activity_search_result.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/search/layout/fragment_search_diary.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/search/layout/fragment_search_user.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/search/layout/search_diary_item.xml" value="0.146875" />
+        <entry key="app/src/main/res/search/layout/search_item.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/search/layout/search_user_item.xml" value="0.3296875" />
         <entry key="app/src/main/res/weather/layout/activity_mainview.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/weather/layout/activity_weather.xml" value="0.2" />
+        <entry key="app/src/main/res/weather/layout/fragment_mainview.xml" value="0.23958333333333334" />
+        <entry key="app/src/main/res/weather/layout/fragment_place.xml" value="0.2" />
         <entry key="app/src/main/res/weather/layout/now.xml" value="0.25104166666666666" />
       </map>
     </option>

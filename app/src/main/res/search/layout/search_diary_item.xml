@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:background="@drawable/search_diary_item_drawable"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/mainpic_iv"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:textColor="#090909"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/mainpic_iv"
+       app:layout_constraintStart_toEndOf="@id/mainpic_iv" />
+    <TextView
+        android:layout_marginStart="12dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/content_tv"
+        app:layout_constraintStart_toEndOf="@id/mainpic_iv"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        app:layout_constraintBottom_toTopOf="@id/user_icon_iv"
+        android:layout_height="wrap_content"/>
+
+<!--    bottom 该控件的，后面的bottom 为参考id的-->
+<!--    如果 bottom，跟top都规定了，就会居中-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_icon_iv"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toEndOf="@id/mainpic_iv"
+        app:layout_constraintBottom_toBottomOf="@id/mainpic_iv"/>
+
+    <TextView
+        android:id="@+id/username_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/user_icon_iv"
+        app:layout_constraintStart_toEndOf="@id/user_icon_iv"
+        app:layout_constraintTop_toTopOf="@id/user_icon_iv" />
+
+    <ImageView
+        android:id="@+id/gz_iv"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/like_icon"
+        app:layout_constraintBottom_toBottomOf="@id/username_tv"
+        app:layout_constraintEnd_toStartOf="@id/like_count_tv"
+        app:layout_constraintTop_toTopOf="@id/username_tv" />
+
+    <TextView
+        android:id="@+id/like_count_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintBottom_toBottomOf="@id/gz_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gz_iv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

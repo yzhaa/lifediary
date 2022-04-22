@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<yzh.lifediary.view.WHImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<yzh.lifediary.customview.WHImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:scaleType="centerCrop"
     android:id="@+id/image_item"
     android:layout_height="wrap_content">
 
-</yzh.lifediary.view.WHImageView>
+</yzh.lifediary.customview.WHImageView>

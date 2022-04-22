@@ -10,6 +10,9 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
 
     <application
         android:name=".MyApplication"
@@ -21,14 +24,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lifediary"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".view.search.SearchResultActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme"/>
+        <activity
+            android:name=".view.search.SearchActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name=".view.info.change.ChangePasswordActivity"
+            android:exported="false"
+            android:theme="@style/ChangeActivity" />
+        <activity
+            android:name=".view.info.change.ChangeNameActivity"
+            android:exported="false"
+            android:theme="@style/ChangeActivity" />
+        <activity
+            android:name=".view.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name=".view.info.PersonalActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name=".view.info.FollowActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name=".view.info.CollectActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme" />
         <activity
             android:name="com.donkingliang.imageselector.ImageSelectorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.donkingliang.imageselector.PreviewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity android:name="com.donkingliang.imageselector.ClipImageActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -41,14 +71,15 @@
         </provider>
 
         <activity
-            android:name=".view.UpDiaryActivity"
-            android:exported="false" />
+            android:name=".view.main.UpDiaryActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme" />
         <activity
-            android:name=".view.DiaryDetailsActivity"
-            android:theme="@style/MyTheme"
-            android:exported="false" />
+            android:name=".view.main.DiaryDetailsActivity"
+            android:exported="false"
+            android:theme="@style/MyTheme" />
         <activity
-            android:name=".view.LoginAndRegisterActivity"
+            android:name=".view.LoginActivity"
             android:exported="true"
             android:theme="@style/MyTheme">
             <intent-filter>
@@ -58,12 +89,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/MyTheme"
             android:name=".view.MainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/MyTheme" />
         <activity
-            android:name=".view.ChangeInfoActivity"
-            android:exported="true" />
+            android:name=".view.info.change.ChangeInfoActivity"
+            android:exported="true"
+            android:theme="@style/MyTheme" />
     </application>
 
 </manifest>

@@ -2,9 +2,6 @@ package yzh.lifediary.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,37 +9,37 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.yzh.myjson.Gson
-import com.yzh.myjson.TypeToken
+
+
 import yzh.lifediary.MyApplication
 import yzh.lifediary.R
 import yzh.lifediary.entity.User
-import yzh.lifediary.entity.UserResponse
-import yzh.lifediary.okhttp.*
 import yzh.lifediary.util.Constant
-import yzh.lifediary.util.TaskExecutor
-import yzh.lifediary.view.ChangeInfoActivity
-import yzh.lifediary.view.TAG
-import java.io.IOException
+import yzh.lifediary.util.loadIcon
+import yzh.lifediary.view.info.change.ChangeInfoActivity
 
-val fromAlbum = 2
+import yzh.lifediary.view.info.CollectActivity
+import yzh.lifediary.view.info.FollowActivity
+import yzh.lifediary.view.info.PersonalActivity
+
+
+
 
 class InfoAdapter(var user: User, val fragment: Fragment) : BaseAdapter() {
     //    private var icon =BitmapFactory.decodeFile(user.icon)
-    private val LOGIN_OUT=4
-    private val ARTICLE=3
-    private val LIKE=1
-    private val BOOK=2
+    private val LOGIN_OUT = 4
+    private val ARTICLE = 3
+    private val FOLLOW = 1
+    private val COLLECT = 2
 
     inner class UserInfoCM(val icon: ImageView, val id: TextView, val name: TextView)
     inner class ItemCM(val icon: ImageView, val label: TextView)
 
     private val lisItemIcon =
-        listOf(R.drawable.guanzhu, R.drawable.shoucang, R.drawable.guanzhu, R.drawable.shoucang)
+        listOf(R.drawable.guanzhu, R.drawable.shoucang, R.drawable.jilu, R.drawable.tuichu)
     private val listItemLabel = listOf("关注", "收藏", "个人文章", "退出")
 
-    private lateinit var imageView: ImageView
+
 
     override fun getCount(): Int {
         return lisItemIcon.size + 1
@@ -74,10 +71,10 @@ class InfoAdapter(var user: User, val fragment: Fragment) : BaseAdapter() {
             val userInfoCM = view.tag as UserInfoCM
             userInfoCM.name.text = user.username
             userInfoCM.id.text = user.account.toString()
-            setOnKeyListener(userInfoCM.icon, userInfoCM.name)
-            Glide.with(fragment)
-                .load(Constant.BASE_URL + "/" + user.iconPath)
-                .into(userInfoCM.icon)
+           view.setOnClickListener {
+               fragment.startActivity(Intent(fragment.requireContext(), ChangeInfoActivity::class.java))
+           }
+            userInfoCM.icon.loadIcon(Constant.BASE_URL + "/" + user.iconPath)
         } else {
             if (convertView == null || convertView.tag !is ItemCM) {
                 view =
@@ -86,11 +83,35 @@ class InfoAdapter(var user: User, val fragment: Fragment) : BaseAdapter() {
             } else view = convertView
             val itemCM = view.tag as ItemCM
             view.setOnClickListener {
-                when(position){
+                when (position) {
                     LOGIN_OUT -> {
                         fragment.activity?.apply {
                             Constant.loginOut(this)
                         }
+                    }
+                    COLLECT -> {
+                        fragment.startActivity(
+                            Intent(
+                                fragment.requireContext(),
+                                CollectActivity::class.java
+                            )
+                        )
+                    }
+                    ARTICLE -> {
+                        fragment.startActivity(
+                            Intent(
+                                fragment.requireContext(),
+                                PersonalActivity::class.java
+                            ).putExtra("user", Constant.user)
+                        )
+                    }
+                    FOLLOW -> {
+                        fragment.startActivity(
+                            Intent(
+                                fragment.requireContext(),
+                                FollowActivity::class.java
+                            )
+                        )
                     }
 
 
@@ -103,55 +124,6 @@ class InfoAdapter(var user: User, val fragment: Fragment) : BaseAdapter() {
     }
 
 
-
-    private fun setOnKeyListener(icon: ImageView, name: TextView) {
-        imageView = icon
-        icon.setOnClickListener {
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            // 指定只显示照片
-            intent.type = "image/*"
-            fragment.startActivityForResult(intent, fromAlbum)
-        }
-        name.setOnClickListener {
-            fragment.startActivity(Intent(
-                fragment.activity,
-                ChangeInfoActivity::class.java
-            ).apply { putExtra("adapter", user) })
-        }
-
-    }
-
-
-    fun noticeChange(uri: Uri) {
-        val bitmap = fragment.activity?.contentResolver?.openFileDescriptor(uri, "r")?.use {
-
-            BitmapFactory.decodeFileDescriptor(it.fileDescriptor)
-
-        }
-        imageView.setImageBitmap(bitmap)
-        OkHttpClient.getOkHttpCline().newCall(
-            Request.Builder().baseUrl(Constant.BASE_URL).url("modify/icon")
-                .post(
-                    RequestBody.Builder().type(RequestBody.ImageType).writeBitmap(listOf(bitmap))
-                        .build()
-                ).build()
-        ).enqueue(object : Callback {
-            override fun onFailure(call: Call?, e: IOException?) {
-                Log.d(TAG, "onFailure: " + e.toString())
-            }
-
-            override fun onResponse(call: Call?, response: Response?) {
-                val ur = Gson.getGson().fromJson<UserResponse>(response?.body,
-                    object : TypeToken<UserResponse>() {}.type)
-                Log.d(TAG, "onResponse: " + ur.data)
-                Constant.user = ur.data
-                user=Constant.user
-                notifyDataSetChanged()
-                TaskExecutor.writeUserToFile(fragment.requireActivity(), user)
-            }
-        })
-    }
 
 
 }

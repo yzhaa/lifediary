@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.UpDiaryActivity"
+    tools:context=".view.main.UpDiaryActivity"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include
@@ -16,6 +17,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -23,46 +26,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="标题："
-            android:textSize="14sp"
+
+            android:textSize="@dimen/up_textSize"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/up_title_et"
-            android:textSize="14sp"
+            android:textSize="@dimen/up_textSize"
             android:maxLines="1"
             android:background="@null"
-            android:hint="s"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:hint="这一刻的想法..."
+            android:textCursorDrawable="@drawable/cursor_style"
             app:layout_constraintBottom_toBottomOf="@id/up_title_tv"
             app:layout_constraintStart_toEndOf="@id/up_title_tv"
-            app:layout_constraintTop_toTopOf="@id/up_title_tv" />
+            app:layout_constraintTop_toTopOf="@id/up_title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/up_content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="@dimen/up_textSize"
             android:text="内容:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/up_title_et" />
 
         <EditText
+            android:textCursorDrawable="@drawable/cursor_style"
             android:background="@null"
-            android:hint=""
+            android:layout_height="200dp"
             android:id="@+id/up_content_et"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:gravity="start"
-            android:textSize="14sp"
-            android:layout_height="wrap_content"
-            android:maxLines="5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/up_content_tv" />
-
-
-
+            android:textSize="@dimen/up_textSize"
+            android:hint="..."
+            android:maxLines="8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/up_content_tv"
+            app:layout_constraintTop_toTopOf="@id/up_content_tv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/up_cv"

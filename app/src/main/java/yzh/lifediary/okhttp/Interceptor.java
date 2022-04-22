@@ -8,7 +8,7 @@ import com.yzh.myjson.TypeToken;
 
 import yzh.lifediary.MyApplication;
 import yzh.lifediary.NetWork.LoginOutBroadCastKt;
-import yzh.lifediary.entity.LoginResponse;
+import yzh.lifediary.entity.MessageResponse;
 
 import yzh.lifediary.view.MainActivityKt;
 
@@ -16,7 +16,7 @@ public class Interceptor {
 
     public boolean handle(Response response){
 
-        LoginResponse message = Gson.getGson().fromJson(response.body, new TypeToken<LoginResponse>() {}.getType());
+        MessageResponse message = Gson.getGson().fromJson(response.body, new TypeToken<MessageResponse>() {}.getType());
         Log.d(MainActivityKt.TAG, "handle: "+response.body);
         if (message.getMessage().equals("没有权限，请先登录")) {
             MyApplication.context.sendBroadcast(new Intent().setAction(LoginOutBroadCastKt.LOGIN_OUT));

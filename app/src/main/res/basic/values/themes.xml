@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Lifediary"  parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Lifediary"  parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blue</item>
@@ -33,6 +33,8 @@
         <!-- true: status栏的图标和文字为黑色；false: sstatus栏的图标和文字为白色 -->
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+
 
 </resources>
 

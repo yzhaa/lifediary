@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--RelativeLayout这里设置margin在listView中不生效-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_margin="20dp"
-
     android:layout_height="match_parent">
     <ImageView
+        android:layout_marginStart="10dp"
         android:layout_alignParentStart="true"
         android:layout_width="50dp"
         android:layout_height="50dp"

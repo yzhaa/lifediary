@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.aitsuki.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:autoClose="true"
+    app:designer="@string/classic_designer"
+    app:preview="none"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginStart="20dp"
+    android:padding="5dp"
+    android:layout_marginEnd="20dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:id="@+id/sc_cancel_tv"
+        android:textColor="@color/white"
+        android:layout_width="50dp"
+        android:layout_gravity="end"
+        android:text="取消收藏"
+        android:ems="2"
+        android:gravity="center"
+        android:background="@drawable/text_view_border"
+        android:layout_height="match_parent"/>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sc_item"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/sc_main_iv"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sc_title_tv"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="17sp"
+                app:layout_constraintStart_toEndOf="@id/sc_main_iv"
+                app:layout_constraintTop_toTopOf="@id/sc_main_iv" />
+
+            <TextView
+                android:id="@+id/sc_name_tv"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@id/sc_ax_iv"
+                app:layout_constraintBottom_toBottomOf="@id/sc_main_iv"
+                app:layout_constraintStart_toEndOf="@id/sc_main_iv" />
+
+            <ImageView
+                android:id="@+id/sc_ax_iv"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/sc_aixin"
+                app:layout_constraintBottom_toBottomOf="@id/sc_name_tv"
+                app:layout_constraintEnd_toStartOf="@id/sc_lc_tv" />
+
+            <TextView
+                android:id="@+id/sc_lc_tv"
+                android:layout_width="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/sc_ax_iv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/sc_ax_iv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</com.aitsuki.swipe.SwipeLayout>

@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">lifediary</string>
-    <string name="str_username_tv">用户名:</string>
+    <string name="app_name">Life Diary</string>
+    <string name="str_username_tv">帐号:</string>
     <string name="str_password_tv">密码:</string>
-    <string name="login_btn_lgoin">登入</string>
-    <string name="str_username_et">请输入帐号</string>
-    <string name="str_password_et">请输入密码:</string>
+    <string name="login_btn">登入</string>
+    <string name="register_btn">注册</string>
+    <string name="back_login_btn">返回登录</string>
+    <string name="str_username_et">输入帐号</string>
+    <string name="str_password_et">输入密码:</string>
+    <string name="str_name_et">输入昵称:</string>
+    <string name="str_qr_password_et">再次输入密码:</string>
 </resources>

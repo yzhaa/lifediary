@@ -1,7 +1,10 @@
 package com.yzh.myjson;
 
 
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,32 +63,63 @@ public class Gson {
         return null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     private List<?> fromJsonList(JSONArray jsonArray, Type type) throws JSONException, IllegalAccessException, InstantiationException {
         List<Object> list = new ArrayList<>(jsonArray.length());
+
         if (type instanceof ParameterizedType) {
             for (int i = 0; i < jsonArray.length(); i++) {
                 list.add(fromJsonList(jsonArray.getJSONArray(i), ((ParameterizedType) type).getActualTypeArguments()[0]));
+
             }
         } else {
 
-            Map<Field, String> map = getDeSerialMapping(typeToClass(type));
-            for (int i = 0; i < jsonArray.length(); i++) {
-                list.add(fromJsonObject(map, jsonArray.getJSONObject(i), typeToClass(type)));
+            if (primary(type) || type == String.class || type == boolean.class) {
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    //注意这里使用get（i）
+                    list.add(jsonArray.get(i));
+                }
+            } else {
+                Map<Field, String> map = getDeSerialMapping(typeToClass(type));
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    list.add(fromJsonObject(map, jsonArray.getJSONObject(i), typeToClass(type)));
+                }
             }
+
         }
         return list;
     }
 
-    private Object fromJsonObject(Map<Field, String> map,JSONObject jsonObject, Class<?> z) throws JSONException, IllegalAccessException, InstantiationException {
+    private Object fromJsonObject(Map<Field, String> map, JSONObject jsonObject, Class<?> z) {
 
         Object o = UnsafeHelper.newInstance(z);
         for (Field f : map.keySet()) {
             if (f.getGenericType() instanceof ParameterizedType) {
-                Object v = fromJsonList(jsonObject.getJSONArray(map.get(f)), ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0]);
-                f.set(o, v);
+                Object v;
+                try {
+                    v = fromJsonList(jsonObject.getJSONArray(map.get(f)), ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0]);
+                    f.set(o, v);
+                } catch (JSONException | IllegalAccessException | InstantiationException e) {
+                    e.printStackTrace();
+                    try {
+                        f.set(o, null);
+                    } catch (IllegalAccessException g) {
+                        g.printStackTrace();
+                    }
+                }
             } else {
-
-                getObjectWithFiled(f, o, jsonObject.get(map.get(f)));
+                try {
+                    getObjectWithFiled(f, o, jsonObject.get(map.get(f)));
+                } catch (JSONException | IllegalAccessException | InstantiationException e) {
+                    e.printStackTrace();
+                    try {
+                        getObjectWithFiled(f, o, null);
+                    } catch (JSONException | IllegalAccessException | InstantiationException g) {
+                        g.printStackTrace();
+                    }
+                }
             }
         }
         return o;
@@ -93,26 +127,36 @@ public class Gson {
 
 
     private void getObjectWithFiled(Field field, Object o, Object value) throws IllegalAccessException, JSONException, InstantiationException {
+
         //还不够完善
-        if (field.getType() == int.class || field.getType() == float.class
-                || field.getType() == double.class || field.getType() == short.class) {
+        if (value == null || value.equals("") || value.toString().equals("null")) {
+            Log.d("TestNull", "getObjectWithFiled: ");
+
+            if (primary(field.getType())) {
+                field.set(o, 0);
+            } else if (field.getType() == boolean.class) {
+                field.set(o, false);
+            } else {
+                field.set(o, null);
+            }
+
+        } else if (primary(field.getType())) {
             field.set(o, Integer.valueOf(value.toString()));
         } else if (field.getType() == String.class || field.getType() == boolean.class) {
             field.set(o, value);
         } else {
-            if (value == null || value.equals("")) {
-                field.set(o, null);
-            } else {
-                field.set(o, fromJsonObject(getDeSerialMapping(field.getType()), new JSONObject(value.toString()), typeToClass(field.getType())));
-            }
-
-
+            field.set(o, fromJsonObject(getDeSerialMapping(field.getType()), new JSONObject(value.toString()), typeToClass(field.getType())));
         }
-
     }
 
+    private boolean primary(Type type) {
 
-    private void handlerObject(Map<Field, String> fieldStringMap, Object o, StringBuilder sb) throws IllegalAccessException {
+        return (type== int.class || type == float.class
+                || type == double.class || type == short.class);
+    }
+
+    private void handlerObject(Map<Field, String> fieldStringMap, Object o, StringBuilder sb) throws
+            IllegalAccessException {
         sb.append("{");
         for (Field f : fieldStringMap.keySet()) {
             String key = Objects.requireNonNull(fieldStringMap.get(f));
@@ -133,7 +177,8 @@ public class Gson {
 
     }
 
-    private void addString(Field field, StringBuilder sb, Object o) throws IllegalAccessException {
+    private void addString(Field field, StringBuilder sb, Object o) throws
+            IllegalAccessException {
 
         if (field.getType() == String.class || field.getType() == int.class || field.getType() == float.class
                 || field.getType() == double.class || field.getType() == short.class || field.getType() == boolean.class) {
@@ -169,12 +214,13 @@ public class Gson {
     }
 
 
-    private Object judgeAndExecuteDeSerial(String str, Type type) throws IllegalAccessException, JSONException, InstantiationException {
+    private Object judgeAndExecuteDeSerial(String str, Type type) throws
+            IllegalAccessException, JSONException, InstantiationException {
         if (type instanceof ParameterizedType) {
             if ((List.class.isAssignableFrom(((ParameterizedType) type).getRawType().getClass()))) {
                 return fromJsonList(new JSONArray(str), ((ParameterizedType) type).getActualTypeArguments()[0]);
             } else {
-                return  judgeAndExecuteDeSerial(str, ((ParameterizedType) type).getRawType());
+                return judgeAndExecuteDeSerial(str, ((ParameterizedType) type).getRawType());
             }
         } else if (type instanceof Class) {
             return fromJsonObject(getDeSerialMapping((Class<?>) type), new JSONObject(str), typeToClass(type));
@@ -221,6 +267,8 @@ public class Gson {
 
 
     private Map<Field, String> getDeSerialMapping(Class<?> tClass) {
+
+
         Stream<Field> s1 = Arrays.stream(tClass.getFields());
         Stream<Field> s2 = Arrays.stream(tClass.getDeclaredFields());
         List<Field> list = Stream.concat(s1, s2).distinct().collect(Collectors.toList());

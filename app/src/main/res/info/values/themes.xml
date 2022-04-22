@@ -1,0 +1,12 @@
+<resources>
+  <style name="Theme.Lifediary.NoActionBar" >
+  <item name="windowActionBar">false</item>
+  <item name="windowNoTitle">true</item>
+</style>
+  <style name="Theme.Lifediary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="Theme.Lifediary.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+  <style name="ChangeActivity" parent="MyTheme">
+    <item name="colorControlNormal">@color/blue</item>
+    <item name="colorControlActivated">@color/blue</item>
+  </style>
+</resources>

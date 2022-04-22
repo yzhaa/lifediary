@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginAndRegisterActivity">
+    tools:context=".view.LoginActivity">
 
     <yzh.lifediary.customview.CustomVideoView
         android:id="@+id/vv"
@@ -13,61 +14,75 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:fitsSystemWindows="true" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:id="@+id/login_ll_pw"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
         android:layout_centerInParent="true"
         android:layout_height="wrap_content">
         <TextView
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_marginStart="30dp"
-            android:id="@+id/login_tv_id"
             android:layout_height="wrap_content"
-            android:text="@string/str_password_tv" android:textSize="26sp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/login_id_tv"
+            android:text="@string/str_username_tv" android:textSize="26sp"/>
         <EditText
-            android:id="@+id/login_et_pw"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf= "@id/login_id_tv"
+            app:layout_constraintTop_toTopOf="@id/login_id_tv"
+            app:layout_constraintBottom_toBottomOf="@id/login_id_tv"
+            android:layout_width="0dp"
+            android:singleLine="true"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:hint="@string/str_username_et"
+            android:id="@+id/login_id_et"/>
+        <TextView
+            app:layout_constraintStart_toStartOf="@id/login_id_tv"
+            app:layout_constraintEnd_toEndOf="@id/login_id_tv"
+            app:layout_constraintTop_toBottomOf="@id/login_id_tv"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_pw_tv"
+            android:text="@string/str_password_tv" android:textSize="26sp"/>
+
+        <EditText
+            app:layout_constraintEnd_toEndOf="@id/login_id_et"
+            app:layout_constraintStart_toStartOf="@id/login_id_et"
+            app:layout_constraintTop_toTopOf="@id/login_pw_tv"
+            app:layout_constraintBottom_toBottomOf="@id/login_pw_tv"
+            android:id="@+id/login_pw_et"
+            android:singleLine="true"
+            android:layout_width="0dp"
             android:hint="@string/str_password_et"
             android:inputType="textPassword"
             android:layout_height="wrap_content"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_above="@id/login_ll_pw"
-        android:id="@+id/login_ll_id"
-        >
-        <TextView
+        <Button
+            app:layout_constraintTop_toBottomOf="@id/login_pw_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/register_btn"
+            android:id="@+id/login_btn"
+            android:text="@string/login_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/login_tv_pw"
-            android:layout_marginStart="30dp"
-            android:text="@string/str_username_tv" android:textSize="26sp"/>
-        <EditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:hint="@string/str_username_et"
-            android:id="@+id/login_et_id"
-            />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/login_btn_login"
-        android:text="@string/login_btn_lgoin"
-        android:layout_width="wrap_content"
-        android:textSize="24sp"
-        android:layout_below="@id/login_ll_pw"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content" />
-
+            android:textSize="24sp"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content" />
+        <Button
+            app:layout_constraintTop_toTopOf="@id/login_btn"
+            app:layout_constraintBottom_toBottomOf="@id/login_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/login_btn"
+            android:id="@+id/register_btn"
+            android:text="@string/register_btn"
+            android:layout_width="wrap_content"
+            android:textSize="24sp"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
 

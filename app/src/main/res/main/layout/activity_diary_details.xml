@@ -5,10 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-
-    tools:context=".view.DiaryDetailsActivity">
+    tools:context=".view.main.DiaryDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,11 +15,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp">
+            android:layout_height="72dp"
+            android:background="@color/blue"
+            android:paddingStart="15dp"
+            android:paddingTop="32dp"
+            android:paddingEnd="15dp">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/back_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -41,6 +41,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/username_tv"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
@@ -50,87 +51,86 @@
                 app:layout_constraintTop_toTopOf="@id/user_icon_iv" />
 
 
-            <Button
+            <ImageView
                 android:id="@+id/gz_iv"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="20dp"
+                android:scaleType="fitCenter"
                 android:background="@drawable/iconweiguanzhu"
                 app:layout_constraintBottom_toBottomOf="@id/username_tv"
-                app:layout_constraintEnd_toStartOf="@id/share_tv"
+                app:layout_constraintEnd_toStartOf="@id/like_count_tv"
                 app:layout_constraintTop_toTopOf="@id/username_tv" />
 
-            <com.google.android.material.button.MaterialButton
-
-                android:id="@+id/share_tv"
+            <Button
+                android:id="@+id/like_count_tv"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
                 android:background="@drawable/fenxiang"
                 app:layout_constraintBottom_toBottomOf="@id/gz_iv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/gz_iv" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <com.youth.banner.Banner
+
             android:id="@+id/banner"
-            app:banner_indicator_normal_color="@color/black"
-            app:banner_indicator_selected_color="@color/blue"
             android:layout_width="match_parent"
-            android:layout_height="350dp" />
+            android:layout_height="500dp"
+            app:banner_indicator_normal_color="@color/black"
+            app:banner_indicator_selected_color="@color/blue" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            />
 
         <LinearLayout
+
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/diary_title_tv"
-                android:textStyle="bold"
-                android:textSize="23sp"
-                android:textColor="#131313"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:orientation="vertical">
 
             <TextView
-                android:textSize="17sp"
+                android:id="@+id/diary_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#131313"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/diary_content_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="17sp" />
 
 
             <RelativeLayout
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="20dp"
-                    android:textSize="10sp"
                     android:id="@+id/diary_time_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:id="@+id/like_iv"
                     android:layout_width="20dp"
-                    android:scaleType="fitCenter"
                     android:layout_height="20dp"
-                    android:src="@drawable/wdianzan"
-                    android:id="@+id/like_iv" />
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/wdianzan" />
             </RelativeLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
 </ScrollView>
+
+

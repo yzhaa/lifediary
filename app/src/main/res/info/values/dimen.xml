@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="change_item_height">60dp</dimen>
+    <dimen name="change_label_textSize">18sp</dimen>
+    <dimen name="save_title_item">17sp</dimen>
+    <dimen name="change_pw_textSize">17sp</dimen>
+    <dimen name="change_pw_marginTop">10dp</dimen>
+
+<integer name="name_length">10</integer>
+</resources>

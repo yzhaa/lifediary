@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<resources>
 <paths>
-
+<!--    要加跟路径才内容提供器才不会报错-->
+    <root-path path="" name="camera_photos" />
     <!-- 这个是保存拍照图片的路径,必须配置。 -->
     <external-path
         name="images"
         path="Pictures" />
+<!--    要加根-->
+    <external-path
+        name="external_files"
+        path="/" />
+
 </paths>
+</resources>
+
 

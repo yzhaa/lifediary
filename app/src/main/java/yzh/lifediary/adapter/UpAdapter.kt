@@ -2,17 +2,16 @@ package yzh.lifediary.adapter
 
 
 import android.app.Activity
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.batchat.preview.PreviewTools
-import com.bumptech.glide.Glide
 import yzh.lifediary.R
+import yzh.lifediary.util.loadPic
 
-import yzh.lifediary.view.TAG
 
 class UpAdapter(val activity: Activity) : RecyclerView.Adapter<UpAdapter.ViewHolder>() {
 
@@ -45,9 +44,7 @@ class UpAdapter(val activity: Activity) : RecyclerView.Adapter<UpAdapter.ViewHol
 
         list?.get(position).apply {
             this?.let {
-                Glide.with(activity)
-                    .load(this)
-                    .into(holder.image)
+                holder.image.loadPic(this)
 
             }
 
