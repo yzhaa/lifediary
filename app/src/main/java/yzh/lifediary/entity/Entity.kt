@@ -15,7 +15,7 @@ data class User(
 
 data class UserResponse(val message: String, val code: Int, val data: User)
 
-data class FollowListResponse(val message: String, val code: Int, val data:MutableList<User>)
+data class FollowListResponse(val message: String, val code: Int, val data:MutableList<UserAndIsFollowOV>)
 
 
 //不关心返回来的数据
@@ -59,11 +59,12 @@ data class DiaryItem(
     val content: String
 ) : Serializable
 
+data class UserAndIsFollowOV(val name:String,val id: Int, val iconPath: String,var follow:Boolean):Serializable
 
 data class ItemResponse(val message: String, val code: Int, val data: MutableList<DiaryItem>)
 
 data class SearchResultResponse(val message: String, val code: Int, val data:SearchResult)
-data class SearchResult(val users: List<User>, val diarys: List<DiaryItem>) : Serializable
+data class SearchResult(val userFollowOVS: List<UserAndIsFollowOV>, val diarys: List<DiaryItem>) : Serializable
 
 data class SearchResponse(val message: String, val code: Int, val data: List<String>)
 

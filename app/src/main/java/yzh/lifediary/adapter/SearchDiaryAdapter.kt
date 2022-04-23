@@ -1,6 +1,7 @@
 package yzh.lifediary.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,6 +15,7 @@ import yzh.lifediary.util.Constant
 import yzh.lifediary.util.loadIcon
 import yzh.lifediary.util.loadPic
 import yzh.lifediary.util.startActivity
+import yzh.lifediary.view.TAG
 import yzh.lifediary.view.main.DiaryDetailsActivity
 
 class SearchDiaryAdapter(val fragment: Fragment) : RecyclerView.Adapter<SearchDiaryAdapter.ViewHolder>() {
@@ -34,6 +36,7 @@ class SearchDiaryAdapter(val fragment: Fragment) : RecyclerView.Adapter<SearchDi
         viewHolder.itemView.setOnClickListener {
             fragment.startActivity(DiaryDetailsActivity::class.java){
                 putExtra("item", list?.get(viewHolder.adapterPosition))
+                putExtra("isMain", false)
             }
         }
         return viewHolder
@@ -44,7 +47,6 @@ class SearchDiaryAdapter(val fragment: Fragment) : RecyclerView.Adapter<SearchDi
         list?.get(position).apply {
             this?.let {
                 holder.userIcon.loadIcon(Constant.BASE_URL + "/" + userIcon)
-
                 holder.userName.text= username
                 holder.likeCount.text=likeCount.toString()
                 holder.title.text=title

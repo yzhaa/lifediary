@@ -2,8 +2,7 @@ package yzh.lifediary.adapter
 
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,23 +10,26 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 
 import androidx.recyclerview.widget.RecyclerView
+import com.yzh.myjson.Gson
+import com.yzh.myjson.TypeToken
 
 
 import yzh.lifediary.R
 import yzh.lifediary.entity.*
+import yzh.lifediary.okhttp.*
 import yzh.lifediary.util.Constant
 import yzh.lifediary.util.loadIcon
+import yzh.lifediary.util.startActivity
+import yzh.lifediary.view.TAG
 import yzh.lifediary.view.info.PersonalActivity
+import java.io.IOException
 
-import java.util.*
+class SearchUserAdapter (val fragment:Fragment) : RecyclerView.Adapter<SearchUserAdapter.ViewHolder>() {
+    var list: List<UserAndIsFollowOV>? = null
 
-class SearchUserAdapter(val activity: Activity) : RecyclerView.Adapter<SearchUserAdapter.ViewHolder>() {
-    var list: MutableList<User>? = null
-
-    var removeList: MutableList<Int> = LinkedList()
-    var addList: MutableList<Int> = LinkedList()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val item: ConstraintLayout = view.findViewById(R.id.gz_item)
@@ -37,24 +39,67 @@ class SearchUserAdapter(val activity: Activity) : RecyclerView.Adapter<SearchUse
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.gz_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_user_item, parent, false)
         val viewHolder = ViewHolder(view)
-        viewHolder.controlTV.setOnClickListener {
+        viewHolder.controlTV.setOnClickListener { nowView->
+            nowView.isClickable = false
             list!![viewHolder.adapterPosition].let {
-                if (!removeList.contains(it.id)) {
-                    removeList.add(it.id)
+                if (it.follow) {
+                        OkHttpClient.getOkHttpCline().newCall(
+                                Request.Builder().baseUrl(Constant.BASE_URL).url("follow/d").post(
+                                        RequestBody.Builder().addParam("userId", it.id.toString())
+                                            .build()).build()
+                            ).enqueue(object  :Callback{
+                                override fun onFailure(call: Call?, e: IOException?) {
+                                    nowView.isClickable=true
+                                }
+
+                                override fun onResponse(call: Call?, response: Response?) {
+                                    val messageResponse = Gson.getGson().fromJson<MessageResponse>(
+                                        response?.body,
+                                        object : TypeToken<MessageResponse>() {}.type
+                                    )
+                                    if (messageResponse.code == 0) {
+                                        action(nowView, it)
+                                    } else {
+                                        Constant.showToast(messageResponse.message)
+                                    }
+
+                                    nowView.isClickable=true
+                                }
+                            })
                 } else {
-                    removeList.remove(it.id)
+                    OkHttpClient.getOkHttpCline().newCall(
+                        Request.Builder().baseUrl(Constant.BASE_URL).url("follow/up").post(
+                            RequestBody.Builder().addParam("userId", it.id.toString())
+                                .build()).build()
+                    ).enqueue(object  :Callback{
+                        override fun onFailure(call: Call?, e: IOException?) {
+                            nowView.isClickable=true
+                        }
+
+                        override fun onResponse(call: Call?, response: Response?) {
+                            val messageResponse = Gson.getGson().fromJson<MessageResponse>(
+                                response?.body,
+                                object : TypeToken<MessageResponse>() {}.type
+                            )
+                            if (messageResponse.code == 0) {
+                                action(nowView, it)
+                            } else {
+                                Constant.showToast(messageResponse.message)
+                            }
+                            nowView.isClickable=true
+                        }
+                    })
                 }
-                updateControlTV(viewHolder.controlTV, it.id)
+
             }
         }
         viewHolder.item.setOnClickListener {
-            activity.startActivity(
-                Intent(activity, PersonalActivity::class.java).putExtra(
-                    "user", list!![viewHolder.adapterPosition]
-                )
-            )
+           fragment.startActivity(PersonalActivity::class.java){
+               val userAndIsFollowOV = list!![viewHolder.adapterPosition]
+               putExtra("user", User(id = userAndIsFollowOV.id, username = userAndIsFollowOV.name, iconPath = userAndIsFollowOV.iconPath))
+           }
         }
         return viewHolder
     }
@@ -64,8 +109,8 @@ class SearchUserAdapter(val activity: Activity) : RecyclerView.Adapter<SearchUse
         list?.get(position).apply {
             this?.let {
                 holder.iconIV.loadIcon(Constant.BASE_URL + "/" + iconPath)
-                holder.nameTV.text = username
-                updateControlTV(holder.controlTV, it.id)
+                holder.nameTV.text = name
+                updateControlTV(holder.controlTV, it.follow)
             }
 
         }
@@ -73,9 +118,10 @@ class SearchUserAdapter(val activity: Activity) : RecyclerView.Adapter<SearchUse
 
     override fun getItemCount() = if (list == null) 0 else list!!.size
 
-    private fun updateControlTV(textView: TextView, id: Int) {
+    private fun updateControlTV(textView: TextView, isFollow:Boolean) {
+        Log.d(TAG, "updateControlTV: $isFollow")
         textView.apply {
-            text = if (!removeList.contains(id)) {
+            text = if (isFollow) {
                 setBackgroundResource(R.drawable.ygz_drawable)
                 "已关注"
             } else {
@@ -83,6 +129,12 @@ class SearchUserAdapter(val activity: Activity) : RecyclerView.Adapter<SearchUse
                 "关注"
             }
         }
+
+    }
+
+    private fun  action(controlView: View, it:UserAndIsFollowOV){
+        it.follow = !it.follow
+        updateControlTV(controlView as TextView, it.follow)
 
     }
 }

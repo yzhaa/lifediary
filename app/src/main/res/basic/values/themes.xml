@@ -7,6 +7,9 @@
 <!--        状态栏-->
         <item name="colorPrimaryVariant">@color/teal_200</item>
 
+<!--系统的控件有效，可能系统默认添加了控件点击特性-->
+        <item name="android:colorControlHighlight">@color/white</item>
+
         <item name="colorOnPrimary">@color/white</item>
 <!--        字体强调的颜色-->
         <item name="colorAccent">@color/black</item>
@@ -24,6 +27,7 @@
 
 
     <style name="MyTheme" parent="Theme.Lifediary">
+<!--        -->
         <!-- true: status栏会有一层阴影；false: status栏没有阴影;当该项为true时，则name="android:windowLightStatusBar"设置无效，永远为白色 -->
         <item name="android:windowTranslucentStatus">false</item>
         <!-- 使底部导航栏透明 -->

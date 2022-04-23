@@ -18,7 +18,7 @@ import yzh.lifediary.entity.DiaryItem
 
 
 class SearchDiaryFragment: Fragment() {
-    lateinit var adapter: SearchDiaryAdapter
+   val adapter: SearchDiaryAdapter= SearchDiaryAdapter(this)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,7 +26,6 @@ class SearchDiaryFragment: Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_search_diary, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        adapter = SearchDiaryAdapter(this)
         recyclerView.adapter = adapter
         return view
     }
@@ -37,6 +36,7 @@ class SearchDiaryFragment: Fragment() {
         adapter.notifyDataSetChanged()
 
     }
+
 
 
 

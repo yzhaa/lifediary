@@ -16,13 +16,14 @@ import yzh.lifediary.R
 import yzh.lifediary.adapter.SearchUserAdapter
 import yzh.lifediary.entity.DiaryItem
 import yzh.lifediary.entity.User
+import yzh.lifediary.entity.UserAndIsFollowOV
 
 import yzh.lifediary.okhttp.*
 
 
 
 class SearchUserFragment : Fragment() {
-    lateinit var adapter:SearchUserAdapter
+     val adapter=SearchUserAdapter(this)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,37 +31,16 @@ class SearchUserFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search_user, container, false)
         val recyclerView=view.findViewById<RecyclerView>(R.id.search_user_rv)
-        adapter =SearchUserAdapter(this)
         recyclerView.adapter=adapter
         return view
     }
 
 
 
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        if (adapter.removeList.size > 0) {
-//            TaskExecutor.execute {
-//                OkHttpClient.getOkHttpCline()
-//                    .newCall(
-//                        Request.Builder().baseUrl(Constant.BASE_URL).url("follow/ds")
-//                            .post(
-//                                RequestBody.Builder()
-//                                    .addParam("userIds", adapter.removeList.toString())
-//                                    .build()
-//                            )
-//                            .build()
-//                    ).execute()
-//            }
-//        }
-//
-//    }
 @SuppressLint("NotifyDataSetChanged")
-fun  update(users:MutableList<User>){
+fun  update(users:List<UserAndIsFollowOV>){
         adapter.list=users
         adapter.notifyDataSetChanged()
-
     }
 
 

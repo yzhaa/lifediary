@@ -34,6 +34,7 @@ class DiaryAdapter(val fragment: Fragment) : RecyclerView.Adapter<DiaryAdapter.V
         viewHolder.itemView.setOnClickListener {
             fragment.startActivity(DiaryDetailsActivity::class.java){
                 putExtra("item", list?.get(viewHolder.adapterPosition))
+                putExtra("isMain", true)
             }
         }
         return viewHolder

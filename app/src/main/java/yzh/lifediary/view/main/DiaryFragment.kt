@@ -34,7 +34,7 @@ var isInsert = false //全局的变量。不会销毁
 
 //这个变量是看看是否从InfoFragment 跳转过来的，如果是的话，就重绘，否则recycleview出现重影
 var isRepaint = false
-var isUpdate = false //点赞，关注，之后更新
+var isUpdateInMain = false //点赞，关注，之后更新
 
 class DiaryFragment() : Fragment() {
 
@@ -67,7 +67,7 @@ class DiaryFragment() : Fragment() {
             popupWindow.setPopupGravity(Gravity.BOTTOM).showPopupWindow()
 
         }
-        isUpdate = true
+        isUpdateInMain = true
         return view
     }
 
@@ -80,11 +80,11 @@ class DiaryFragment() : Fragment() {
             Log.d(TAG, "onStart: 插入了")
             isInsert = false
         }
-        if (isUpdate) {
+        if (isUpdateInMain) {
             sr.isRefreshing = true
             getData(false)
             Log.d(TAG, "onStart: 更新了")
-            isUpdate = false
+            isUpdateInMain = false
         }
 
 

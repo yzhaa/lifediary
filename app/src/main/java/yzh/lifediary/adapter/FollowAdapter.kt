@@ -25,7 +25,7 @@ import java.util.*
 
 
 class FollowAdapter(val activity: Activity) : RecyclerView.Adapter<FollowAdapter.ViewHolder>() {
-    var list: MutableList<User>? = null
+    var list: MutableList<UserAndIsFollowOV>? = null
 
     var removeList: MutableList<Int> = LinkedList()
 
@@ -52,7 +52,10 @@ class FollowAdapter(val activity: Activity) : RecyclerView.Adapter<FollowAdapter
         viewHolder.item.setOnClickListener {
             activity.startActivity(
                 Intent(activity, PersonalActivity::class.java).putExtra(
-                    "user", list!![viewHolder.adapterPosition]
+                    "user", with( list!![viewHolder.adapterPosition]){
+                    User(id = this.id, username = this.name, iconPath = this.iconPath)
+                    }
+
                 )
             )
         }
@@ -64,7 +67,7 @@ class FollowAdapter(val activity: Activity) : RecyclerView.Adapter<FollowAdapter
         list?.get(position).apply {
             this?.let {
                 holder.iconIV.loadIcon(Constant.BASE_URL + "/" + iconPath)
-                holder.nameTV.text = username
+                holder.nameTV.text = name
                 updateControlTV(holder.controlTV, it.id)
             }
 

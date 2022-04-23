@@ -21,6 +21,7 @@ import yzh.lifediary.R
 import yzh.lifediary.adapter.PersonalAdapter
 import yzh.lifediary.entity.ItemResponse
 import yzh.lifediary.entity.User
+import yzh.lifediary.entity.UserAndIsFollowOV
 
 import yzh.lifediary.okhttp.*
 import yzh.lifediary.util.Constant
@@ -28,7 +29,7 @@ import yzh.lifediary.util.loadIcon
 import java.io.IOException
 
 class PersonalActivity : AppCompatActivity() {
-    lateinit var user: User
+    lateinit var user:User
     lateinit var adapter: PersonalAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

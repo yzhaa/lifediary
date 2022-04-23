@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
         tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
+
                 when(tab?.text){
                    "主页"-> viewPage.setCurrentItem(0,false)
                    "我"-> viewPage.setCurrentItem(1,false)

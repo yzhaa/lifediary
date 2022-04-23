@@ -12,14 +12,13 @@ import kotlinx.android.synthetic.main.fragment_main.fm_tl
 import kotlinx.android.synthetic.main.fragment_main.fm_vp
 import yzh.lifediary.R
 import yzh.lifediary.adapter.SearchAdapter
-import yzh.lifediary.entity.SearchResponse
-import yzh.lifediary.entity.SearchResult
 import yzh.lifediary.entity.SearchResultResponse
 import yzh.lifediary.okhttp.*
 import yzh.lifediary.util.Constant
 import java.io.IOException
 
 
+var isUpdateInSearchResult = false
 class SearchResultActivity : AppCompatActivity() {
     val tabName = listOf("记录", "用户")
     var title: String? = null
@@ -30,12 +29,15 @@ class SearchResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search_result)
         title = intent.getStringExtra("title")
         initView()
-        getData()
+        isUpdateInSearchResult = true
+
     }
 
     private fun initView() {
         search_tv.text = title
-
+        back_iv.setOnClickListener {
+            finish()
+        }
 //        要这样设置，不要   left_btn.isVisible=false
 
         adapter = SearchAdapter(supportFragmentManager, lifecycle)
@@ -44,9 +46,20 @@ class SearchResultActivity : AppCompatActivity() {
         val mediator = TabLayoutMediator(fm_tl, fm_vp) { tab, position -> //这里可以自定义TabView
             tab.text = tabName[position]
         }
+        search_item.setOnClickListener {
+            finish()
+        }
         //要执行这一句才是真正将两者绑定起来
         //要执行这一句才是真正将两者绑定起来
         mediator.attach()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isUpdateInSearchResult) {
+            getData()
+            isUpdateInSearchResult = !isUpdateInSearchResult
+        }
     }
 
     private fun getData() {
@@ -60,16 +73,17 @@ class SearchResultActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call?, response: Response?) {
-                   Gson.getGson().fromJson<SearchResultResponse>(
+                    Gson.getGson().fromJson<SearchResultResponse>(
                         response?.body,
                         object : TypeToken<SearchResultResponse>() {}.type
                     ).data.apply {
-                       adapter.update(this)
-                   }
+                        adapter.update(this)
+                    }
 
                 }
             })
     }
+
 
 
 }

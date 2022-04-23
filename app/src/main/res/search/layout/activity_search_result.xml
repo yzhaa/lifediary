@@ -21,6 +21,7 @@
         android:src="@drawable/fanhuijiantou"
         android:layout_height="30dp"/>
         <RelativeLayout
+            android:id="@+id/search_item"
             android:background="@drawable/search_drawable"
             android:layout_toEndOf="@id/back_iv"
             android:layout_width="match_parent"
@@ -53,6 +54,7 @@
 
     </RelativeLayout>
     <com.google.android.material.tabs.TabLayout
+        app:tabRippleColor="@color/white"
         android:id="@+id/fm_tl"
         android:layout_width="match_parent"
         android:layout_height="40dp"

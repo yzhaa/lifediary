@@ -41,12 +41,22 @@ class SearchActivity : AppCompatActivity() {
         searchView.isSubmitButtonEnabled = true
         searchView.queryHint = "请输入搜索内容"
         adapter = ArrayAdapter<String>(this, R.layout.search_item, data)
+
         lv.adapter = adapter
+        lv.setOnItemClickListener { _, _, position, _ ->
+            adapter.getItem(position).apply {
+                searchView.setQuery(this,true)
+//                this@SearchActivity.startActivity(SearchResultActivity::class.java) {
+//                    putExtra("title",
+//                }
+            }
+
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-              this@SearchActivity.startActivity(SearchResultActivity::class.java){
-                  putExtra("title", query)
-              }
+                this@SearchActivity.startActivity(SearchResultActivity::class.java) {
+                    putExtra("title", query)
+                }
                 return true
             }
 

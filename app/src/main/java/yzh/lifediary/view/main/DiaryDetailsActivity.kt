@@ -25,7 +25,9 @@ import yzh.lifediary.util.TaskExecutor
 import yzh.lifediary.util.loadIcon
 import yzh.lifediary.util.loadPic
 import yzh.lifediary.view.info.PersonalActivity
+import yzh.lifediary.view.search.isUpdateInSearchResult
 import java.io.IOException
+import kotlin.properties.Delegates
 
 
 class DiaryDetailsActivity : AppCompatActivity() {
@@ -33,6 +35,7 @@ class DiaryDetailsActivity : AppCompatActivity() {
     var diaryDetails: DiaryDetails? = null
     var isFollow = false
     var isSelf = false
+    var isMain by Delegates.notNull<Boolean>()
 
     //用来分享的
     lateinit var mainBitmap: Bitmap
@@ -44,6 +47,7 @@ class DiaryDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_diary_details)
         item = intent.getSerializableExtra("item") as DiaryItem
         isSelf = Constant.user.id == item.userId
+        isMain = intent.getBooleanExtra("isMain", true)
         init()
     }
 
@@ -200,9 +204,7 @@ class DiaryDetailsActivity : AppCompatActivity() {
                                 object : TypeToken<MessageResponse>() {}.type
                             )
                         if (messageResponse.code == 0) {
-                            item.isLike = !item.isLike
-                            likeUpdate()
-                            isUpdate=true
+                            actionInLIke()
                         }
                         like_iv.isClickable = true
                     }
@@ -233,9 +235,7 @@ class DiaryDetailsActivity : AppCompatActivity() {
                                     object : TypeToken<MessageResponse>() {}.type
                                 )
                             if (messageResponse.code == 0) {
-                                isFollow = !isFollow
-                                followUpdate()
-                                isUpdate=true
+                                actionInFollow()
                             }
                             like_iv.isClickable = true
                         }
@@ -250,6 +250,28 @@ class DiaryDetailsActivity : AppCompatActivity() {
         like_count_tv.setOnClickListener {
             share()
         }
+    }
+
+    private fun actionInFollow() {
+        isFollow = !isFollow
+        followUpdate()
+        if (isMain) {
+            isUpdateInMain = true
+        } else {
+            isUpdateInSearchResult = true
+        }
+
+    }
+
+    private fun actionInLIke() {
+        item.isLike = !item.isLike
+        likeUpdate()
+        if (isMain) {
+            isUpdateInMain = true
+        } else {
+            isUpdateInSearchResult = true
+        }
+
     }
 
     private fun getData() {

@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/basic/drawable-v24/ic_launcher_foreground.xml" value="0.1245" />
         <entry key="app/src/main/res/basic/drawable/divider_bg.xml" value="0.1" />
         <entry key="app/src/main/res/basic/drawable/ic_launcher_background.xml" value="0.1245" />
+        <entry key="app/src/main/res/basic/drawable/tab.xml" value="0.1" />
         <entry key="app/src/main/res/basic/drawable/text_view_border.xml" value="0.1" />
         <entry key="app/src/main/res/basic/drawable/translucent_button.xml" value="0.1" />
         <entry key="app/src/main/res/basic/drawable/translucent_edit.xml" value="0.1" />
