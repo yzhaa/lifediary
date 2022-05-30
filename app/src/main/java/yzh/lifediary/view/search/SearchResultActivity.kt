@@ -20,7 +20,7 @@ import java.io.IOException
 
 var isUpdateInSearchResult = false
 class SearchResultActivity : AppCompatActivity() {
-    val tabName = listOf("记录", "用户")
+    val tabName = listOf("日记", "用户")
     var title: String? = null
     lateinit var adapter: SearchAdapter
 

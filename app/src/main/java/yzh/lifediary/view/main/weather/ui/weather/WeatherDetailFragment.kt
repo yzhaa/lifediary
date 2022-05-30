@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import yzh.lifediary.view.main.weather.logic.model.Weather
 import yzh.lifediary.view.main.weather.logic.model.getSky
-import kotlinx.android.synthetic.main.activity_weather.*
+import kotlinx.android.synthetic.main.fragment_weather.*
 import kotlinx.android.synthetic.main.forecast.*
 import kotlinx.android.synthetic.main.life_index.*
 import kotlinx.android.synthetic.main.now.*
@@ -31,7 +31,7 @@ class WeatherDetailFragment(var intent: Intent) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_weather,container,false)
+        return inflater.inflate(R.layout.fragment_weather,container,false)
     }
 
     override fun onStart() {
@@ -116,6 +116,7 @@ class WeatherDetailFragment(var intent: Intent) : Fragment() {
         dressingText.text = lifeIndex.dressing[0].desc
         ultravioletText.text = lifeIndex.ultraviolet[0].desc
         carWashingText.text = lifeIndex.carWashing[0].desc
+
         weatherLayout.visibility = View.VISIBLE
     }
 

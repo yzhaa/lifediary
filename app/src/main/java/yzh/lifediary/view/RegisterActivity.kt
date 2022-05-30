@@ -1,7 +1,5 @@
 package yzh.lifediary.view
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.yzh.myjson.Gson
@@ -17,7 +15,7 @@ import yzh.lifediary.util.Constant
 
 import java.io.IOException
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -25,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        initBase()
         back_btn.setOnClickListener {
             finish()
         }
@@ -38,12 +37,13 @@ class RegisterActivity : AppCompatActivity() {
                                 RequestBody.Builder()
                                     .addParam("account", account_et.text.toString())
                                     .addParam("password", password_et.text.toString())
-                                    .addParam("username",name_et.text.toString()).build()
+                                    .addParam("username", name_et.text.toString()).build()
                             ).build()
                     ).enqueue(object : Callback {
                         override fun onFailure(call: Call?, e: IOException?) {
                             Log.d(TAG, "onResponse: ${e.toString()}")
                             it.isClickable = true
+                            done()
                         }
 
                         override fun onResponse(call: Call?, response: Response?) {
@@ -60,14 +60,15 @@ class RegisterActivity : AppCompatActivity() {
                                 Constant.showToast(userResponse.message)
                             }
                             it.isClickable = true
+                            done()
                         }
                     })
+                    load()
                 } else {
                     Constant.showToast("两次输入密码不一致")
                     it.isClickable = true
                 }
-            }
-            else {
+            } else {
                 Constant.showToast("请输入完整")
                 it.isClickable = true
             }
@@ -75,4 +76,21 @@ class RegisterActivity : AppCompatActivity() {
         }
 
     }
+
+
+    private fun done() {
+        hide {
+            register_main.alpha = 1f
+            register_main.isClickable = true
+        }
+    }
+
+    private fun load() {
+        show {
+            register_main.alpha = 0.5f
+            register_main.isClickable = false
+        }
+    }
+
+
 }

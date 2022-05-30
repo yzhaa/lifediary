@@ -26,7 +26,7 @@ import java.io.*
 
 object Constant {
 
-    val BASE_URL = "http://192.168.1.169:8081"
+    val BASE_URL = "http://192.168.17.193:8081"
     val LoginInfo = "loginInfo"
     val userFile = "userInfo"
 
@@ -67,6 +67,7 @@ object Constant {
 
     fun loginOut(context: Context) {
         TaskExecutor.execute {
+            OkHttpClient.getOkHttpCline().newCall(Request.Builder().baseUrl(BASE_URL).url("logout").build()).execute()
             val file: File = context.getFileStreamPath(userFile)
             if (file.exists()) file.delete()
             val edit =

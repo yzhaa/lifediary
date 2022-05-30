@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ import yzh.lifediary.util.Constant
 import yzh.lifediary.util.TaskExecutor
 import yzh.lifediary.util.loadIcon
 import yzh.lifediary.util.loadPic
+import yzh.lifediary.view.TAG
 import yzh.lifediary.view.info.PersonalActivity
 import yzh.lifediary.view.search.isUpdateInSearchResult
 import java.io.IOException
@@ -174,6 +176,7 @@ class DiaryDetailsActivity : AppCompatActivity() {
     }
 
     private fun likeUpdate() {
+        Log.d(TAG, "likeUpdate: "+item.isLike)
         like_iv.setImageResource(if (item.isLike) R.drawable.dianzan else R.drawable.wdianzan)
     }
 

@@ -21,7 +21,7 @@ import yzh.lifediary.view.search.SearchActivity
 
 class MainFragment : Fragment() {
     var isFirst = true
-    val tabName = listOf("记录", "天气")
+    val tabName = listOf("日记", "天气")
 
     override fun onCreateView(
         inflater: LayoutInflater,

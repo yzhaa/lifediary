@@ -16,10 +16,11 @@ import yzh.lifediary.okhttp.*
 import yzh.lifediary.util.Constant
 import yzh.lifediary.util.SpacesItemDecoration
 import yzh.lifediary.util.TaskExecutor
+import yzh.lifediary.view.BaseActivity
 import java.io.IOException
 
 
-class UpDiaryActivity : AppCompatActivity() {
+class UpDiaryActivity : BaseActivity() {
     private val gridLayoutManager by lazy {
         GridLayoutManager(this, 3)
     }
@@ -33,6 +34,7 @@ class UpDiaryActivity : AppCompatActivity() {
 
 
     private fun init() {
+        initBase()
         title_tv.text = ""
         right_btn.setBackgroundResource(R.drawable.tijiaoqueren)
 
@@ -47,9 +49,11 @@ class UpDiaryActivity : AppCompatActivity() {
             finish()
         }
         right_btn.setOnClickListener {
-            if (up_title_et.text.toString().isNotBlank() && up_content_et.toString().isNotBlank()&& upAdapter.list!!.size>0) {
+            if (up_title_et.text.toString().isNotBlank() && up_content_et.toString()
+                    .isNotBlank() && upAdapter.list!!.size > 0
+            ) {
                 val list = mutableListOf<Bitmap>()
-                right_btn.isClickable=false
+                right_btn.isClickable = false
                 TaskExecutor.execute {
                     for (fileName in upAdapter.list!!) {
                         list.add(Constant.bitmapCompress(fileName))
@@ -64,7 +68,8 @@ class UpDiaryActivity : AppCompatActivity() {
                             ).build()
                     ).enqueue(object : Callback {
                         override fun onFailure(call: Call?, e: IOException?) {
-                            right_btn.isClickable=true
+                            right_btn.isClickable = true
+                            done()
                         }
 
                         override fun onResponse(call: Call?, response: Response?) {
@@ -74,18 +79,33 @@ class UpDiaryActivity : AppCompatActivity() {
                                     response?.body,
                                     object : TypeToken<MessageResponse>() {}.type
                                 )
-                            if (diaryResponse.code==0) {
-                                right_btn.isClickable=true
-                                isInsert=true
+                            if (diaryResponse.code == 0) {
+                                right_btn.isClickable = true
+                                isInsert = true
                                 Constant.showToast("提交成功")
                                 finish()
                             }
+                            done()
 
                         }
                     })
                 }
+                load()
             }
         }
     }
 
+    private fun load() {
+        show {
+            up_main.alpha = 0.5f
+            up_main.isClickable = false
+        }
+    }
+
+    private fun done() {
+        hide {
+            up_main.alpha = 1f
+            up_main.isClickable = true
+        }
+    }
 }

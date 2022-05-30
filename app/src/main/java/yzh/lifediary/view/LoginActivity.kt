@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yzh.myjson.Gson
 import com.yzh.myjson.TypeToken
@@ -23,8 +24,7 @@ import java.io.IOException
 import java.io.ObjectInputStream
 
 
-
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     //创建播放视频的控件对象
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +32,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         init()
         //加载数据
-
     }
 
-
-
     private fun init() {
+        initBase()
+        
         val file: File = MyApplication.context.getFileStreamPath(Constant.userFile)
         if (file.exists()) {
             ObjectInputStream(openFileInput(Constant.userFile)).readObject()
                 ?.apply {
-                    Constant.user=this as User
+                    Constant.user = this as User
                     Log.d(TAG, "fileExists:eeee")
                     startActivity(
                         Intent(
@@ -58,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
         login_btn.setOnClickListener {
             it.isClickable = false
-           OkHttpClient.getOkHttpCline().newCall(
+            OkHttpClient.getOkHttpCline().newCall(
                 Request.Builder().baseUrl(Constant.BASE_URL).url("login").saveCookie()
                     .post(
                         RequestBody.Builder().addParam("account", login_id_et.text.toString())
@@ -68,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 override fun onFailure(call: Call?, e: IOException?) {
                     Log.d(TAG, "onResponse: ${e.toString()}")
                     it.isClickable = true
+                    done()
                 }
 
                 override fun onResponse(call: Call?, response: Response?) {
@@ -77,10 +77,10 @@ class LoginActivity : AppCompatActivity() {
                         object : TypeToken<UserResponse>() {}.type
                     )
                     Log.d(TAG, "onResponse: $userResponse")
-                    if (userResponse.code ==0) {
-                        Constant.user=userResponse.data
+                    if (userResponse.code == 0) {
+                        Constant.user = userResponse.data
                         Log.d(TAG, "onCreateView++:${Constant.user} ")
-                        TaskExecutor.writeUserToFile(this@LoginActivity,userResponse.data)
+                        TaskExecutor.writeUserToFile(this@LoginActivity, userResponse.data)
                         startActivity(
                             Intent(
                                 this@LoginActivity,
@@ -89,18 +89,19 @@ class LoginActivity : AppCompatActivity() {
                         )
                         finish()
                     }
+                    Constant.showToast(userResponse.message)
                     it.isClickable = true
+                    done()
                 }
             })
-
+            load()
 
         }
         register_btn.setOnClickListener {
-            startActivity(Intent(this,RegisterActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
     }
-
 
     private fun initView() {
         vv.setVideoURI(Uri.parse("android.resource://$packageName/${R.raw.view}"))
@@ -108,7 +109,6 @@ class LoginActivity : AppCompatActivity() {
         vv.setOnCompletionListener { vv.start() }
     }
 
-    //返回重启加载
     override fun onStart() {
         super.onStart()
         initView()
@@ -117,6 +117,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onDestroy() {
         vv.suspend()
         super.onDestroy()
+    }
+
+    private fun load() {
+        show {
+            login_main.alpha = 0.5f
+            login_main.isClickable = false
+        }
+    }
+
+    private fun done() {
+        hide {
+            login_main.alpha = 1f
+            login_main.isClickable=true
+        }
     }
 }
 

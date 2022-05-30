@@ -22,7 +22,7 @@ class UpAdapter(val activity: Activity) : RecyclerView.Adapter<UpAdapter.ViewHol
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        //这个只能是false
+
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.up_image_item, parent, false)
         val viewHolder = ViewHolder(view)

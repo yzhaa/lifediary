@@ -37,7 +37,7 @@ class InfoAdapter(var user: User, val fragment: Fragment) : BaseAdapter() {
 
     private val lisItemIcon =
         listOf(R.drawable.guanzhu, R.drawable.shoucang, R.drawable.jilu, R.drawable.tuichu)
-    private val listItemLabel = listOf("关注", "收藏", "个人文章", "退出")
+    private val listItemLabel = listOf("关注", "收藏", "日记", "退出")
 
 
 
